@@ -1,0 +1,62 @@
+{
+    "Version": "2012-10-17",
+    "Id": "ParkMyCloudRecommendedPolicyAsOf2020-04-17",
+    "Statement": [{
+            "Sid": "ParkMyCloudManagement",
+            "Action": [
+                "autoscaling:Describe*",
+                "autoscaling:ResumeProcesses",
+                "autoscaling:SuspendProcesses",
+                "autoscaling:UpdateAutoScalingGroup",
+                "ce:Describe*",
+                "ce:Get*",
+                "ce:List*",
+                "ec2:Describe*",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ecs:Describe*",
+                "ecs:List*",
+                "ecs:UpdateService",
+                "eks:Describe*",
+                "eks:List*",
+                "eks:UpdateNodegroupConfig",
+                "iam:GetUser",
+                "redshift:Describe*",
+                "redshift:PauseCluster",
+                "redshift:ResizeCluster",
+                "redshift:ResumeCluster",
+                "rds:Describe*",
+                "rds:ListTagsForResource",
+                "rds:ModifyDBInstance",
+                "rds:StartDBCluster",
+                "rds:StartDBInstance",
+                "rds:StopDBCluster",
+                "rds:StopDBInstance",
+                "savingsplans:Describe*"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Sid": "ParkMyCloudStartInstanceWithEncryptedBoot",
+            "Effect": "Allow",
+            "Action": "kms:CreateGrant",
+            "Resource": "*"
+        },
+        {
+            "Sid": "ParkMyCloudCloudWatchAccess",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:ListMetrics"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "true"
+                }
+            }
+        }
+    ]
+}
